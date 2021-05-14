@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @books.each do |list| %>
+    <% @book.each do |book| %>
     <tr>
       <td><%= book.title %></td>
       <td><%= book.body %></td>
@@ -19,4 +19,10 @@
   </tbody>
 </table>
 <h1>Newbook</h1>
-
+<%= form_with model: @book, url:'/books', local:true do |f| %>
+<p>title</p>
+<%= f.text_field :title %>
+<p>body</p>
+<%= f.text_area :body %>
+<%= f.submit '投稿' %>
+<% end %>
