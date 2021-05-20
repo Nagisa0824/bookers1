@@ -11,6 +11,7 @@
     <tr>
       <td><%= book.title %></td>
       <td><%= book.body %></td>
+      <td><%= book.genre %></td>
       <td><%= link_to "show",book_path(book.id)%></td>
       <td><%= link_to "edit",edit_book_path(book.id)%></td>
       <td><%= link_to "destroy","/books/#{book.id}", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
@@ -18,11 +19,20 @@
     <% end %>
   </tbody>
 </table>
+<% if flash[:notice] %>
+　<p id="notice">
+    <%= flash[:notice] %>
+　</p>
+<% end %>
+
 <h1>Newbook</h1>
 <%= form_with model: @book, url:'/books', local:true do |f| %>
 <p>title</p>
 <%= f.text_field :title %>
 <p>body</p>
 <%= f.text_area :body %>
+
+<%= button_to 'CREATE', {controller: 'books', action: 'create'}, {method: :post }%>
 <%= f.submit 'Create ' %>
 <% end %>
+
